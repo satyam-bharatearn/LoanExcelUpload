@@ -34,6 +34,7 @@
     </style>
 @endpush
 @section('content')
+<section class="content">
     <div class="container py-4">
         <h1 class="text-center mb-4">Lender Data Entry System</h1>
         <div class="card mb-4">
@@ -208,6 +209,7 @@
             </div>
         </div>
     </div>
+</section>
 @endsection
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
