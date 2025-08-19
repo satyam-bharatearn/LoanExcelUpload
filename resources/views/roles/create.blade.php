@@ -1,14 +1,14 @@
 @extends('layout')
 
 @section('content')
-    <section class="content-header mb-4">
+    <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row mb-5">
                 <div class="col-sm-6">
-                    <h4 class="fw-bold mb-0">Add Role</h4>
+                    <h1>Add Role</h41>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-end mb-0">
+                    <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
                             <a href="{{ route('roles.index') }}">Roles</a>
                         </li>
@@ -17,13 +17,13 @@
                 </div>
             </div>
         </div>
-    </section>
+        {{-- </section>
 
-    <section class="content">
+    <section class="content"> --}}
         <div class="row justify-content-center">
-            <div class="col-lg-10">
+            <div class="col-lg-10 p-2">
                 <div class="card shadow-sm border-0">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-user-shield me-2"></i>Create New Role</span>
                     </div>
                     <div class="card-body">
@@ -68,7 +68,7 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#permission').select2({
                 placeholder: "Select permissions"
             });
