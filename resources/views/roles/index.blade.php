@@ -11,8 +11,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Created By</th>
-                        <th>Level</th>
-                        <th>Is Employee</th>
                         <th>Permission</th>
                         <th class="text-center">Action</th>
                     </tr>
@@ -20,21 +18,13 @@
                 <tbody>
                     @forelse($role as $roles)
                         <tr>
-                            <td><strong>{{ $roles->name }}</strong></td>
-                            <td>{{ $roles->created_by }}</td>
+                            <td><strong>{{ ucfirst($roles->name) }}</strong></td>
+                            <td>{{ $roles->user->name }}</td>
                             <td>
-                                <span class="badge bg-primary">{{ $roles->level }}</span>
-                            </td>
-                            <td>
-                                @if($roles->is_employe)
-                                    <span class="badge bg-success">Yes</span>
-                                @else
-                                    <span class="badge bg-danger">No</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if(!empty($roles->permission))
-                                    <span class="badge bg-info">{{ $roles->permission }}</span>
+                                @if($roles->permissions->isNotEmpty())
+                                    @foreach($roles->permissions as $permission)
+                                        <span class="badge bg-secondary">{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
+                                    @endforeach
                                 @else
                                     <span class="badge bg-secondary">No Permission</span>
                                 @endif
@@ -43,7 +33,6 @@
                                 <a href="{{ route('roles.show', $roles->id) }}" class="btn btn-sm btn-outline-info">
                                     <i class="fas fa-eye"></i> View
                                 </a>
-
                                 <a href="{{ route('roles.edit', $roles->id) }}" class="btn btn-sm btn-outline-success">
                                     <i class="fa fa-pencil"></i> Edit
                                 </a>

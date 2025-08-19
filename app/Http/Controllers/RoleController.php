@@ -12,7 +12,8 @@ class RoleController extends Controller
 
     public function index()
     {
-        $role = Role::all();
+        $role = Role::with(['permissions','user'])->get();
+        // dd($role);
         return view('roles.index', compact('role'));
     }
 
@@ -27,20 +28,14 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'created_by' => 'nullable|integer',
-            'level' => 'required|integer',
-            'is_employe' => 'required|boolean',
-            'permission' => 'required|array', // multi-select will be an array
+            'permission' => 'required|array',
         ]);
-
-        Role::create([
+        $role = Role::create([
             'name' => $request->name,
-            'created_by' => $request->created_by,
-            'level' => $request->level,
-            'is_employe' => $request->is_employe,
-            'permission' => implode(',', $request->permission), // store as comma-separated string
+            'created_by' => auth()->id(),
+            'permission' => implode(',', $request->permission),
         ]);
-
+        $role->permissions()->sync($request->permission);
         return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
