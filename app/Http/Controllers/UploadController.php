@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\LoanImport;
+use App\Imports\UserDumpImport;
 use App\Models\ColumnMapping;
 use App\Models\Lender;
 use App\Models\Loan;
@@ -34,12 +35,23 @@ class UploadController extends Controller
             'file' => 'required|file|mimes:xlsx,xls,csv',
             'lender_id' => 'required|exists:lenders,id'
         ]);
-        $import = new LoanImport($request->lender_id);
-        Excel::import($import, $request->file('file'));
-        if (count($import->failures())) {
-            return back()->with('import_errors', $import->failures());
+        $isAdmin = empty(auth()->user()->role_id) || in_array(auth()->user()->role_id, ['1']);
+        if ($isAdmin) {
+            $import = new LoanImport($request->lender_id);
+            Excel::import($import, $request->file('file'));
+            if (count($import->failures())) {
+                return back()->with('import_errors', $import->failures());
+            }
+            return back()->with('success', 'Excel Imported');
+        } else {
+            $import = new UserDumpImport;
+            Excel::import($import, $request->file('file'));
+            if (count($import->errors) > 0) {
+                return back()->with('success', 'Loans imported with some errors!')
+                    ->with('import_errors', $import->errors);
+            }
+            return back()->with('success', 'Loans imported successfully without errors!');
         }
-        return back()->with('success', 'Excel Imported');
     }
     public function index()
     {

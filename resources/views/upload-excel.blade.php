@@ -50,15 +50,24 @@
                 <div class="modal-body">
                     <form id="excelForm" action="{{ route('loan.import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="mb-3">
-                            <label for="lender" class="form-label fw-bold">Select Lender</label>
-                            <select name="lender_id" id="lender" class="form-control" required>
-                                <option value="" disabled selected>Select a lender</option>
-                                @foreach($lenders as $lender)
-                                    <option value="{{ $lender->id }}">{{ $lender->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @php
+                            $isAdmin = empty(auth()->user()->role_id) || in_array(auth()->user()->role_id, ['admin', 'superadmin']);
+                            $lenderId = $lenders->where('name', 'Common')->first()->id ?? null;
+                        @endphp
+
+                        @if($isAdmin)
+                            <div class="mb-3">
+                                <label for="lender" class="form-label fw-bold">Select Lender</label>
+                                <select name="lender_id" id="lender" class="form-control" required>
+                                    <option value="" disabled selected>Select a lender</option>
+                                    @foreach($lenders as $lender)
+                                        <option value="{{ $lender->id }}">{{ $lender->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @else
+                            <input type="hidden" name="lender_id" value="{{ $lenderId ?? '' }}">
+                        @endif
                         <div class="mb-3">
                             <label for="file" class="form-label fw-bold">Choose Excel File</label>
                             <input type="file" name="file" id="file" accept=".xlsx,.xls" class="form-control" required>

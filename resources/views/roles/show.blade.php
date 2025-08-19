@@ -28,8 +28,7 @@
                                     <strong>Permission:</strong>
                                     @if($role->permissions->isNotEmpty())
                                         @foreach($role->permissions as $permission)
-                                            <span
-                                                class="badge bg-secondary">{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
+                                            <span class="badge bg-secondary">{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
                                         @endforeach
                                     @else
                                         <span class="badge bg-secondary">No Permission</span>
