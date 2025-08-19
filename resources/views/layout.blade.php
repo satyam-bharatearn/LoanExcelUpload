@@ -27,10 +27,8 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars"></i></a>
                 </li>
             </ul>
 
@@ -43,7 +41,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="#"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt mr-2"></i> Logout
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -61,59 +59,43 @@
             <a href="../../index3.html" class="brand-link">
                 <img src="https:/adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light" style="color: #007bff;">AdminLTE 3</span>
+                <span class="brand-text font-weight-light" style="color: #007bff;">Admin</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
-                <div class="user-panel mt-3 pb-3 d-flex">
-                    <div class="image">
-                        <img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
-                    </div>
-                </div>
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+                <nav class="mt-4">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                        data-accordion="true">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <a href="{{ route('dashboard') }}" class="nav-link">
+                                <i class="nav-icon fas fa-chart-line"></i>
                                 <p>
                                     Dashboard
-                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
-                                    </a>
-                                </li>
-                                {{-- <li class="nav-item">
-                                    <a href="../../index2.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
-                                    </a>
-                                </li> --}}
-                            </ul>
                         </li>
-                    </ul>
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard') }}" class="nav-link">
+                                <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                                <p>
+                                    Loan Report
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('loan.upload') }}" class="nav-link">
+                                <i class="nav-icon fas fa-upload"></i>
+                                <p>
+                                    Dump
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Users
                                     <i class="right fas fa-angle-left"></i>
@@ -124,19 +106,19 @@
                                     <a href="{{ route('roles.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create User</p>
-                                    </a>                                   
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('users.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>View User</p>
+                                        <p>All Users</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-user-shield"></i>
                                 <p>
                                     Role
                                     <i class="right fas fa-angle-left"></i>
@@ -147,29 +129,44 @@
                                     <a href="{{ route('roles.create') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create Role</p>
-                                    </a>                                   
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('roles.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>View Role</p>
+                                        <p>All Roles</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('loan.upload') }}" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-handshake"></i>
                                 <p>
-                                    Upload Excel
+                                    Manage Lenders
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('lenders.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Create Lender</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('lenders.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>All Lenders</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('lenders.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <a href="{{ route('logout') }}" class="nav-link">
+                                <i class="nav-icon fas fa-power-off"></i>
                                 <p>
-                                    Lender Details
+                                    Logout
                                 </p>
                             </a>
                         </li>
@@ -183,19 +180,20 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            
+
 
             @yield('content')
         </div>
         <!-- /.content-wrapper -->
 
-        <footer class="main-footer">
+        {{-- <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.2.0
             </div>
-            <strong>Copyright &copy; 2025 <a href="https://evolutosolution.com/">Evoluto solutions Private Limited</a>.</strong> All rights
+            <strong>Copyright &copy; 2025 <a href="https://evolutosolution.com/">Evoluto solutions Private
+                    Limited</a>.</strong> All rights
             reserved.
-        </footer>
+        </footer> --}}
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">

@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            <div class="row mb-5">
                 <div class="col-sm-6">
                     <h1>All Users</h1>
                 </div>
@@ -12,20 +12,21 @@
                         <li class="breadcrumb-item active">Users</li>
                     </ol>
                 </div>
+                <div class="col-12 text-right">
+                    <a class="btn btn-primary justify-content-end" href="{{ route('users.create') }}">
+                        Add User
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="col-12 text-right">
-            <a class="btn btn-primary mb-3 justify-content-end" href="{{ route('users.create') }}">
-                Add User
-            </a>
-        </div>
-        @if(session('success'))
+        @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
     </section>
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -33,16 +34,19 @@
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form id="excelForm" action="{{ route('users.change-password') }}" method="POST" enctype="multipart/form-data">
+                    <form id="excelForm" action="{{ route('users.change-password') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="user_id" id="user_id">
                         <div class="mb-3">
                             <label for="password">New Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Enter Password" required>
                         </div>
                         <div class="mb-3">
                             <label for="confirm_password">Confirm Password</label>
-                            <input type="password" name="password_confirmation" id="confirm_password" class="form-control" placeholder="Enter Confirm Password" required>
+                            <input type="password" name="password_confirmation" id="confirm_password" class="form-control"
+                                placeholder="Enter Confirm Password" required>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <button type="submit" class="btn btn-success">
@@ -64,7 +68,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
-                    <th>Created At</th> 
+                    <th>Created At</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -77,24 +81,50 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var table = $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('users.index') }}',
-                columns: [
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-                    { data: 'role', name: 'role' },
-                    { data: 'name', name: 'name' },
-                    { data: 'email', name: 'email' },
-                    { data: 'phone', name: 'phone' },
-                    { data: 'address', name: 'address' },
-                    { data: 'created_at', name: 'created_at' },
-                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'role',
+                        name: 'role'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'address',
+                        name: 'address'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
+                        orderable: false,
+                        searchable: false
+                    }
                 ],
                 scrollX: true
             });
         });
+
         function openChangePasswordModal(userId) {
             $('#user_id').val(userId);
         }
